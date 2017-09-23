@@ -18,8 +18,8 @@ sudo ufw deny 515
 sudo ufw deny 111
 
 # Updates
-sudo apt-get -y upgrade
 sudo apt-get -y update
+sudo apt-get -y upgrade
 
 # Shuts off Guest ACCT
 sudo echo "allow-guest=false" .. /etc/lightdm/lightdm.conf
