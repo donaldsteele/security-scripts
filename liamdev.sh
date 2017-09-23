@@ -44,8 +44,3 @@ sudo apt-get -y purge netcat*
 
 # Enables auto updates
 sudo dpkg-reconfigure -plow unattended-upgrades
-
-# Installs Clam Antivirus
-sudo apt-get install -y clamav
-sudo freshclam
-sudo clamscan -r --delete
