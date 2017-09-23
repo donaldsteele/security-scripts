@@ -3,9 +3,6 @@
 
 less -FX liamdev.txt # Show figlet text
 
-echo "Checking for root..."
-sleep 2
-
 if [[ $EUID -ne 0 ]]; then
    echo "ERROR!  Script is not being run as root!" 
    exit 1
