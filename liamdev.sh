@@ -10,6 +10,7 @@ if [[ $EUID -ne 0 ]]; then
 fi # Checks for root
 
 # Firewall
+sudo apt-get install gufw
 sudo ufw enable
 sudo ufw deny 23
 sudo ufw deny 2049
