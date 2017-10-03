@@ -5,5 +5,5 @@ about 15 minutes, as I read up on bash for about 10 minutes beforehand!
 
 # Special Thanks To:
 
-- anthonykava
-- amdorj
+- [anthonykava](https://github.com/anthonykava) : Moral Support
+- [amdorj](https://github.com/amdorj) : Overviewing my code and editing my mistakes
