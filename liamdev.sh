@@ -9,41 +9,50 @@ if [[ $EUID -ne 0 ]]; then
    else echo "Success!  Script is being run as root."
 fi # Checks for root
 
+# Install Programs
+apt-get install git
+apt-get install gufw
+
+
 # Firewall
-sudo apt-get install gufw
-sudo ufw enable
-sudo ufw deny 23
-sudo ufw deny 2049
-sudo ufw deny 515
-sudo ufw deny 111
+ufw enable
+ufw deny 23
+ufw deny 2049
+ufw deny 515
+ufw deny 111
 
 # Updates
-sudo apt-get -y update
-sudo apt-get upgrade
+apt-get -y update
+apt-get upgrade
 
 # Shuts off Guest ACCT
-sudo echo "allow-guest=false" .. /etc/lightdm/lightdm.conf
+echo "allow-guest=false" >> /etc/lightdm/lightdm.conf
 
 # Password Age Limits
-sudo sed -i '/^PASS_MAX_DAYS/ c\PASS_MAX_DAYS   90' /etc/login.defs
-sudo sed -i '/^PASS_MIN_DAYS/ c\PASS_MIN_DAYS   10'  /etc/login.defs
-sudo sed -i '/^PASS_WARN_AGE/ c\PASS_WARN_AGE   7' /etc/login.defs
+sed -i '/^PASS_MAX_DAYS/ c\PASS_MAX_DAYS   90' /etc/login.defs
+sed -i '/^PASS_MIN_DAYS/ c\PASS_MIN_DAYS   10'  /etc/login.defs
+sed -i '/^PASS_WARN_AGE/ c\PASS_WARN_AGE   7' /etc/login.defs
 
 # Password Auth
-sudo sed -i '1 s/^/auth optional pam_tally.so deny=5 unlock_time=900 onerr=fail audit even_deny_root_account silent\n/' /etc/pam.d/common-auth
+sed -i '1 s/^/auth optional pam_tally.so deny=5 unlock_time=900 onerr=fail audit even_deny_root_account silent\n/' /etc/pam.d/common-auth
 
 # Makes strong password
-sudo apt-get -y install libpam-cracklib
-sudo sed -i '1 s/^/password requisite pam_cracklib.so retry=3 minlen=8 difok=3 reject_username minclass=3 maxrepeat=2 dcredit=1 ucredit=1 lcredit=1 ocredit=1\n/' /etc/pam.d/common-password
+apt-get -y install libpam-cracklib
+sed -i '1 s/^/password requisite pam_cracklib.so retry=3 minlen=8 difok=3 reject_username minclass=3 maxrepeat=2 dcredit=1 ucredit=1 lcredit=1 ocredit=1\n/' /etc/pam.d/common-password
 
 # Cracking tools/malware.  You get the drift.
-sudo apt-get -y purge hydra*
-sudo apt-get -y purge john*
-sudo apt-get -y purge nikto*
-sudo apt-get -y purge netcat*
+apt-get -y purge hydra*
+apt-get -y purge john*
+apt-get -y purge nikto*
+apt-get -y purge netcat*
+apt-get -y purge aircrack-ng*
+apt-get -y purge hashcat*
+apt-get -y purge nmap*
+apt-get -y purge ncrack*
+apt-get -y purge ophcrack*
 
 # Enables auto updates
-sudo dpkg-reconfigure -plow unattended-upgrades
+dpkg-reconfigure -plow unattended-upgrades
 
 # List user accounts by size
 echo "Home directory space by user"
