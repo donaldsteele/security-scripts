@@ -19,7 +19,7 @@ sudo ufw deny 111
 
 # Updates
 sudo apt-get -y update
-sudo apt-get -y upgrade
+sudo apt-get upgrade
 
 # Shuts off Guest ACCT
 sudo echo "allow-guest=false" .. /etc/lightdm/lightdm.conf
@@ -44,3 +44,38 @@ sudo apt-get -y purge netcat*
 
 # Enables auto updates
 sudo dpkg-reconfigure -plow unattended-upgrades
+
+# List user accounts by size
+echo "Home directory space by user"
+	format="%8s%10s%10s   %-s\n"
+	printf "$format" "Dirs" "Files" "Blocks" "Directory"
+	printf "$format" "----" "-----" "------" "---------"
+	if [ $(id -u) = "0" ]; then
+		dir_list="/home/*"
+	else
+		dir_list=$HOME
+	fi
+	for home_dir in $dir_list; do
+		total_dirs=$(find $home_dir -type d | wc -l)
+		total_files=$(find $home_dir -type f | wc -l)
+		total_blocks=$(du -s $home_dir)
+		printf "$format" $total_dirs $total_files $total_blocks
+	done
+
+# Disable Root Login (SSHd.CONF)
+    if [[ -f /etc/ssh/sshd_config ]]; then
+        sed -i 's/PermitRootLogin .*/PermitRootLogin no/g' /etc/ssh/sshd_config
+    else
+        echo "No SSH server detected so nothing changed"
+    fi
+    echo "Disabled SSH root login (if any)"
+    
+# Ask to remove SAMBA
+    echo "Would you like to remove SAMBA?"
+    while true; do
+        read -p "$* [y/n]: " yn
+        case $yn in
+            [Yy]*) apt remove --purge samba
+            [Nn]*) echo "Aborted"
+        esac
+    done
