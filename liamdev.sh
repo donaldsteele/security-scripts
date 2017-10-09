@@ -3,11 +3,12 @@
 
 less -FX liamdev.txt # Show figlet text
 
+# Checks for root
 if [[ $EUID -ne 0 ]]; then
    echo "ERROR!  Script is not being run as root!" 
    exit 1
    else echo "Success!  Script is being run as root."
-fi # Checks for root
+fi
 
 # Install Programs
 apt-get install git
@@ -27,7 +28,7 @@ ufw deny 111
 apt-get -y update
 apt-get upgrade
 
-# Shuts off Guest ACCT
+# Turns off Guest ACCT
 echo "allow-guest=false" >> /etc/lightdm/lightdm.conf
 
 # Password Age Limits
@@ -81,14 +82,15 @@ echo "Home directory space by user"
     fi
     echo "Disabled SSH root login (if any)"
     
-# Ask to remove SAMBA (WIP)
-#    echo "Would you like to remove SAMBA?"
-#    while true; do
-#        read -p "$* [y/n]: " yn
-#        case $yn in
-#            [Yy]*) apt remove --purge samba
-#            [Nn]*) echo "Aborted"
-#        esac
-#    done
+# Remove Samba (If Installed)
+echo "Would you like to remove SAMBA?"
+while true; do
+        read -r -p "$* [y/n]: " yn
+        case $yn in
+            [Yy]* ) apt remove --purge samba;;
+            [Nn]* ) echo "Aborted";;
+            * ) echo "Invalid input! Please answer y (yes) or n (no)."
+        esac
+    done
 
 buck-security/buck-security
