@@ -1,9 +1,11 @@
 # Bash-Security-Script
 
-Forgive me, as this is my very first script I have made for bash.  It's most likely horrendous, and was put together in a matter of
-about 15 minutes, as I read up on bash for about 10 minutes beforehand!
+This is my very first bash script.  Feel free to send feedback to `admin@liamdev.me`.
 
 # Special Thanks To:
 
 - [anthonykava](https://github.com/anthonykava) : Moral Support
 - [amdorj](https://github.com/amdorj) : Overviewing my code and editing my mistakes
+- My Teammates : Using my script and well... making the team work?
+
+Made with ❤️ in the U.S.A.
