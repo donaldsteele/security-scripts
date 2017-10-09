@@ -13,6 +13,8 @@ fi # Checks for root
 apt-get install git
 apt-get install gufw
 
+# Git buck security
+git clone https://github.com/davewood/buck-security
 
 # Firewall
 ufw enable
@@ -79,12 +81,14 @@ echo "Home directory space by user"
     fi
     echo "Disabled SSH root login (if any)"
     
-# Ask to remove SAMBA
-    echo "Would you like to remove SAMBA?"
-    while true; do
-        read -p "$* [y/n]: " yn
-        case $yn in
-            [Yy]*) apt remove --purge samba
-            [Nn]*) echo "Aborted"
-        esac
-    done
+# Ask to remove SAMBA (WIP)
+#    echo "Would you like to remove SAMBA?"
+#    while true; do
+#        read -p "$* [y/n]: " yn
+#        case $yn in
+#            [Yy]*) apt remove --purge samba
+#            [Nn]*) echo "Aborted"
+#        esac
+#    done
+
+buck-security/buck-security
