@@ -1,6 +1,6 @@
-# Bash-Security-Script
+# Security Scripts
 
-This is my very first bash script.  Feel free to send feedback to `admin@liamdev.me`.
+These are my very first security scripts for Cyberpatriot X.  Feel free to send feedback to `admin@liamdev.me`.
 
 # Special Thanks To:
 
@@ -8,4 +8,4 @@ This is my very first bash script.  Feel free to send feedback to `admin@liamdev
 - [amdorj](https://github.com/amdorj) : Overviewing my code and editing my mistakes
 - My Teammates : Using my script and well... making the team work?
 
-Made with ❤️ in the U.S.A.
+Made with <3 in the U.S.A.
