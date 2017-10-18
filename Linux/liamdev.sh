@@ -57,23 +57,6 @@ apt-get -y purge ophcrack*
 # Enables auto updates
 dpkg-reconfigure -plow unattended-upgrades
 
-# List user accounts by size
-echo "Home directory space by user"
-	format="%8s%10s%10s   %-s\n"
-	printf "$format" "Dirs" "Files" "Blocks" "Directory"
-	printf "$format" "----" "-----" "------" "---------"
-	if [ $(id -u) = "0" ]; then
-		dir_list="/home/*"
-	else
-		dir_list=$HOME
-	fi
-	for home_dir in $dir_list; do
-		total_dirs=$(find $home_dir -type d | wc -l)
-		total_files=$(find $home_dir -type f | wc -l)
-		total_blocks=$(du -s $home_dir)
-		printf "$format" $total_dirs $total_files $total_blocks
-	done
-
 # Disable Root Login (SSHd.CONF)
     if [[ -f /etc/ssh/sshd_config ]]; then
         sed -i 's/PermitRootLogin .*/PermitRootLogin no/g' /etc/ssh/sshd_config
@@ -109,8 +92,23 @@ echo Changing password for user $i
 passwd $i
 done
 
+# List user accounts by size
+echo "Home directory space by user"
+	format="%8s%10s%10s   %-s\n"
+	printf "$format" "Dirs" "Files" "Blocks" "Directory"
+	printf "$format" "----" "-----" "------" "---------"
+	if [ $(id -u) = "0" ]; then
+		dir_list="/home/*"
+	else
+		dir_list=$HOME
+	fi
+	for home_dir in $dir_list; do
+		total_dirs=$(find $home_dir -type d | wc -l)
+		total_files=$(find $home_dir -type f | wc -l)
+		total_blocks=$(du -s $home_dir)
+		printf "$format" $total_dirs $total_files $total_blocks
+	done
+
 # Run The Trusty Ol' Buck Security
 cd buck-security
 ./buck
-
-
