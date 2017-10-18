@@ -101,7 +101,16 @@ echo "Would you like to change the root login?"
             [Nn]* ) echo "Aborted";;
             * ) echo "Invalid input! Please answer y (yes) or n (no)."
         esac
+#Passwords for everyone! (the HUMANS)
+echo Changing password for user root
+passwd
+for i in `awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd`; do 
+echo Changing password for user $i
+passwd $i
+done
 
 # Run The Trusty Ol' Buck Security
 cd buck-security
 ./buck
+
+
