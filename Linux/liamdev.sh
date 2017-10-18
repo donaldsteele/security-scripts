@@ -102,4 +102,6 @@ echo "Would you like to change the root login?"
             * ) echo "Invalid input! Please answer y (yes) or n (no)."
         esac
 
-buck-security/buck-security
+# Run The Trusty Ol' Buck Security
+cd buck-security
+./buck
