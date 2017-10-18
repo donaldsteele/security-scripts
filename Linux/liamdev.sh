@@ -84,13 +84,24 @@ echo "Home directory space by user"
     
 # Remove Samba (If Installed)
 echo "Would you like to remove SAMBA?"
-while true; do
+# while true; do
         read -r -p "$* [y/n]: " yn
         case $yn in
             [Yy]* ) apt remove --purge samba;;
             [Nn]* ) echo "Aborted";;
             * ) echo "Invalid input! Please answer y (yes) or n (no)."
         esac
-    done
 
-buck-security/buck-security
+# Change Root Login
+echo "Would you like to change the root login?"
+# while true; do
+        read -r -p "$* [y/n]: " yn
+        case $yn in
+            [Yy]* ) passwd;;
+            [Nn]* ) echo "Aborted";;
+            * ) echo "Invalid input! Please answer y (yes) or n (no)."
+        esac
+
+# Run The Trusty Ol' Buck Security
+cd buck-security
+./buck
