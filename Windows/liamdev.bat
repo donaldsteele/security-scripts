@@ -15,7 +15,9 @@ if %errorLevel% == 0 (
     goto :admin
 ) else (
     echo Error!  You must run the script with admin rights!
-    pause>nul
+    ::pause>nul
+    ping -n 5 127.0.0.1 >nul
+    GOTO END
 )
 
 :admin
@@ -29,3 +31,5 @@ net user Guest | findstr Active | findstr Yes
 if %errorlevel%==0 echo Guest account is active, deactivating
 if %errorlevel%==1 echo Guest account is not active, so not deactivating
 net user Guest /active:NO
+
+:end
