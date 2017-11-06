@@ -86,12 +86,12 @@ echo "Would you like to change the root login?"
         esac
 	
 #Passwords for everyone! (the HUMANS)
-echo Changing password for user root
-passwd
-for i in `awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd`; do 
-echo Changing password for user $i
-passwd $i
-done
+#echo Changing password for user root
+#passwd
+#for i in `awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd`; do 
+#echo Changing password for user $i
+#passwd $i
+#done
 	
 # List user accounts by size
 echo "Home directory space by user"
@@ -112,4 +112,4 @@ echo "Home directory space by user"
 
 # Run The Trusty Ol' Buck Security
 cd buck-security
-./buck
+./buck-security
